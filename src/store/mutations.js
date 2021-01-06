@@ -15,7 +15,7 @@ export default {
         state.url = '';
     },
     setUserInfo(state, payload){
-        state.nome = payload.name;
+        state.nome = payload.nome;
     },
     setUserUrlPhoto(state, payload){
         state.url = payload.data.url;
