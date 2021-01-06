@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const url = 'http://localhost:8000/users/';
 
 class UserService {
@@ -24,13 +23,22 @@ class UserService {
     }
 
     static insertUser(user) {
-        return axios.post(url, {
-            nome: user.nome,
-            userID: user.userID,
-            updatesPerDay: 2,
-            stories: [],
-            followers: []
-        });
+        console.log("começa insert")
+        return new Promise((resolve,reject) => {
+            axios.post(url, {
+                nome: user.nome,
+                userID: user.userID,
+                updatesPerDay: 2,
+                stories: [],
+                followers: []
+            }).then(response => {
+                console.log('resposta insert',response)
+                resolve(response);
+            })
+            .catch(err => {
+                reject(err);
+            })
+        })
 
     }
 

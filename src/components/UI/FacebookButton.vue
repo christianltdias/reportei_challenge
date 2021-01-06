@@ -9,6 +9,7 @@
 
 <script>
 import UserService from "../../services/userService";
+
 export default {
   data() {
     return {};
@@ -25,38 +26,37 @@ export default {
       if (this.contextMenuController) {
         this.contextMenuController(false);
       }
-      
+
       // Se o login ocorreu, são obtidas demais informações do usuário
       if (authResponse) {
         await this.getResponse();
-        // Insere novo usuario no banco de dados, se ele já não existir  
         await UserService.insertUser(this.$store.getters.getUser);
+
         // Redireciona para o inicio
         this.$router.push({ name: "inicio" });
       }
-    
     },
     async getResponse() {
       const that = this;
-      // Informações do usuario (User ID e nome)
-      await FB.api(
-        "/me?access_token=" + this.$store.getters.userAccessToken,
-        "GET",
-        {},
-        function (response) {
-          that.$store.commit("setUserInfo", response);
-        }
-      );
+        console.log("começa get response")
 
-      // Informações do usuario (url da imagem de perfil)
-      await FB.api(
-        "/me/picture?redirect=false",
-        "GET",
-        {},
-        function (response) {
-          that.$store.commit("setUserUrlPhoto", response);
-        }
-      );
+      return new Promise((resolve) => {
+        // Informações do usuario (url da imagem de perfil)
+        FB.api("/me/picture?redirect=false", "GET", {}, function (response) {
+          that.$store.dispatch("setUserUrlPhoto", response);
+        });
+
+        FB.api(
+          "/me?access_token=" + this.$store.getters.userAccessToken,
+          "GET",
+          {},
+          function (response) {
+            that.$store.dispatch("setUserInfo", response);
+            console.log('resposta',response)
+            resolve(response);
+          }
+        );
+      });
     },
   },
 };

@@ -7,5 +7,11 @@ export default {
     },
     setUpdatesPerDay(context, value){
         context.commit('setUpdatesPerDay', value);
+    },
+    setUserUrlPhoto(context, value){
+        context.commit('setUserUrlPhoto', value);
+    },
+    setUserInfo(context, value){
+        context.commit('setUserInfo', value);
     }
 }
