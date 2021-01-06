@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "serve:ssl": "vue-cli-service serve --https --open --public localhost:8080",
-    "start": "concurrently \"npm run serve:ssl\" \"cd ./server && npm run dev\"",
+    "start": "concurrently \"npm run serve:ssl\" \"cd ./server && node index.js\"",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -28,7 +28,11 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
     "less": "^3.12.2",
-    "less-loader": "^7.0.1"
+    "less-loader": "^7.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3"
   },
   "eslintConfig": {
     "root": true,

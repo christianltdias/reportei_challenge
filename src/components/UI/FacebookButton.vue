@@ -30,7 +30,7 @@ export default {
       if (authResponse) {
         await this.getResponse();
         // Insere novo usuario no banco de dados, se ele já não existir  
-        const user = await UserService.insertUser(this.$store.getters.getUser);
+        await UserService.insertUser(this.$store.getters.getUser);
         // Redireciona para o inicio
         this.$router.push({ name: "inicio" });
       }

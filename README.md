@@ -1,7 +1,7 @@
 *** Não foi abordado o monitoramente de paginas do instagram ou facebook nesse app, por conta de permissões que não consegui solitar ***
 *** Criei somente um sistema que se comunica com o facebook por meio de login, e obtém informações básicas de usuário a partir da Graph API ***
 
-Para conseguir executar o projeto é necessário que as dependências na pasta principal e dentro da pasta server sejam instaladas com o npm install para cada folder.
+Para conseguir executar o projeto é necessário que as dependências na pasta principal.
 
 O folder server contem uma simples API rodando localmente com integração a um banco de dados mongoDB. Lá é salvo somente o nome do usuário, id do facebook, configurações, stories ativos e relatórios de seguidores.
 
@@ -14,5 +14,4 @@ O arquivo userService.js é chamado ao longo da aplicação, de forma estática,
 O projeto é iniciado de forma simultanea a partir da dependencia concurrently.
 
 *** Para rodar o server e o vue-cliente é necessário chamar o 'npm run start' na pasta principal. ***
-*** Lembrando que é necessário baixar as dependencias tanto da pasta principal quanto na pasta server ***
 

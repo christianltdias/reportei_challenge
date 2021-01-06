@@ -18,7 +18,7 @@
         </tr>
       </tbody>
     </table>
-    <h3 v-else-if="!loading">Não existem registros de ativadade</h3>
+    <h3 v-else-if="!loading">Não existem registros de atividade</h3>
     <h3 v-else>Carregando informações...</h3>
   </div>
 </template>
