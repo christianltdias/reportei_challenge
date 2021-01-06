@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:userID', async (req, res) => {
     const user = await getUserByUserID(req.params.userID);
-    console.log(user);
     res.send(user);
 });
 
@@ -30,30 +29,35 @@ router.put('/:userID', async (req, res) => {
         },
     }).then(result => {
         res.status(200).send();
-        console.log(result);
     }).catch(error => {
         res.status(400).send();
-        console.log(error);
     })
 });
 
 
 router.post('/', async (req, res) => {
-    const user = await loadPostsCollection();
-    await user.insertOne({
-        nome: req.body.nome,
-        userID: req.body.userID,
-        updatesPerDay: req.body.updatesPerDay,
-        stories: req.body.stories,
-        followers: req.body.followers
-    });
-    res.status(201).send();
+    const users = await loadPostsCollection();
+    const user = await getUserByUserID(req.body.userID);
+    if (!user) {
+        await users.insertOne({
+            nome: req.body.nome,
+            userID: req.body.userID,
+            updatesPerDay: req.body.updatesPerDay,
+            stories: req.body.stories,
+            followers: req.body.followers
+        });
+        res.status(201).send();
+    }
+    else {
+        res.send(user);
+
+    }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:userID', async (req, res) => {
     const users = await loadPostsCollection();
     await users.deleteOne({
-        _id: new mongodb.ObjectID(req.params.id)
+        userID: req.params.userID
     });
     res.status(200).send();
 });
@@ -73,13 +77,13 @@ async function getUserByUserID(userID) {
     const users = await loadPostsCollection();
 
     return new Promise((resolve, reject) => {
-        users.findOne({userID})
-        .then(response => {
-            resolve(response);
-        })
-        .catch(error => {
-            reject(error);
-        })
+        users.findOne({ userID })
+            .then(response => {
+                resolve(response);
+            })
+            .catch(error => {
+                reject(error);
+            })
     })
 
 }

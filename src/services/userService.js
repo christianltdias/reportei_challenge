@@ -24,19 +24,13 @@ class UserService {
     }
 
     static insertUser(user) {
-        const usuario = this.getUser(user.userID);
-        if (!usuario) {
-            return axios.post(url, {
-                nome: user.nome,
-                userID: user.userID,
-                updatesPerDay: user.updatesPerDay,
-                stories: user.stories,
-                followers: user.followers
-            })
-        }
-        else {
-            return null;
-        }
+        return axios.post(url, {
+            nome: user.nome,
+            userID: user.userID,
+            updatesPerDay: 2,
+            stories: [],
+            followers: []
+        });
 
     }
 
